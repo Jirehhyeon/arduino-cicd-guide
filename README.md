@@ -1,8 +1,8 @@
 # 🚀 아두이노 프로젝트 완전 CI/CD 가이드
 
-[![GitHub Stars](https://img.shields.io/github/stars/YOUR-USERNAME/arduino-cicd-guide?style=for-the-badge)](https://github.com/YOUR-USERNAME/arduino-cicd-guide/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/YOUR-USERNAME/arduino-cicd-guide?style=for-the-badge)](https://github.com/YOUR-USERNAME/arduino-cicd-guide/network)
-[![GitHub Issues](https://img.shields.io/github/issues/YOUR-USERNAME/arduino-cicd-guide?style=for-the-badge)](https://github.com/YOUR-USERNAME/arduino-cicd-guide/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/Jirehhyeon/arduino-cicd-guide?style=for-the-badge)](https://github.com/Jirehhyeon/arduino-cicd-guide/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/Jirehhyeon/arduino-cicd-guide?style=for-the-badge)](https://github.com/Jirehhyeon/arduino-cicd-guide/network)
+[![GitHub Issues](https://img.shields.io/github/issues/Jirehhyeon/arduino-cicd-guide?style=for-the-badge)](https://github.com/Jirehhyeon/arduino-cicd-guide/issues)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 [![Arduino](https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white)](https://arduino.cc/)
