@@ -1,0 +1,778 @@
+{
+  "device_registry": {
+    "version": "1.0.0",
+    "last_updated": "2024-01-15T10:30:00Z",
+    "total_devices": 5,
+    "active_devices": 4,
+    "device_groups": {
+      "greenhouse": {
+        "description": "스마트 온실 시스템",
+        "location": "온실 A동",
+        "devices": ["greenhouse-001", "greenhouse-002"]
+      },
+      "weather_station": {
+        "description": "기상 관측소",
+        "location": "옥상",
+        "devices": ["weather-001"]
+      },
+      "security": {
+        "description": "보안 모니터링",
+        "location": "정문",
+        "devices": ["security-001"]
+      },
+      "laboratory": {
+        "description": "실험실 환경 모니터링",
+        "location": "연구실 201호",
+        "devices": ["lab-001"]
+      }
+    }
+  },
+  "devices": {
+    "greenhouse-001": {
+      "device_info": {
+        "name": "스마트 온실 메인 컨트롤러",
+        "model": "ESP32 DevKit V1",
+        "mac_address": "24:6F:28:AE:12:34",
+        "chip_id": "ESP32-D0WDQ6",
+        "flash_size": "4MB",
+        "cpu_frequency": "240MHz"
+      },
+      "network": {
+        "ip_address": "192.168.1.100",
+        "subnet_mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns_primary": "8.8.8.8",
+        "dns_secondary": "8.8.4.4",
+        "wifi_ssid": "SmartGreenhouse_5G",
+        "wifi_channel": 6,
+        "wifi_rssi": -45,
+        "static_ip": true
+      },
+      "firmware": {
+        "current_version": "1.2.3",
+        "build_date": "2024-01-15T08:30:00Z",
+        "build_hash": "a1b2c3d4e5f6",
+        "update_method": "OTA",
+        "auto_update": true,
+        "rollback_version": "1.2.2"
+      },
+      "hardware": {
+        "sensors": [
+          {
+            "type": "DHT22",
+            "pin": "GPIO2",
+            "description": "온습도 센서",
+            "calibration": {
+              "temperature_offset": 0.0,
+              "humidity_offset": 0.0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "SOIL_MOISTURE",
+            "pin": "GPIO4",
+            "description": "토양 수분 센서",
+            "calibration": {
+              "dry_value": 4095,
+              "wet_value": 1500
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "LIGHT_SENSOR",
+            "pin": "GPIO5",
+            "description": "조도 센서 (CdS)",
+            "calibration": {
+              "dark_value": 0,
+              "bright_value": 4095
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          }
+        ],
+        "actuators": [
+          {
+            "type": "RELAY",
+            "pin": "GPIO18",
+            "description": "워터펌프 릴레이",
+            "load": "5V 300mA 워터펌프",
+            "status": "active",
+            "last_action": "2024-01-15T09:45:00Z"
+          },
+          {
+            "type": "RELAY", 
+            "pin": "GPIO19",
+            "description": "환기팬 릴레이",
+            "load": "5V 150mA 팬",
+            "status": "active",
+            "last_action": "2024-01-15T10:15:00Z"
+          },
+          {
+            "type": "WS2812B",
+            "pin": "GPIO21",
+            "description": "LED 스트립 (10개)",
+            "count": 10,
+            "status": "active",
+            "last_action": "2024-01-15T10:25:00Z"
+          }
+        ]
+      },
+      "monitoring": {
+        "uptime": "72h 15m 30s",
+        "boot_time": "2024-01-12T22:10:00Z",
+        "restart_count": 2,
+        "free_heap": 180000,
+        "min_free_heap": 165000,
+        "max_alloc_heap": 113000,
+        "wifi_reconnects": 1,
+        "last_heartbeat": "2024-01-15T10:29:45Z"
+      },
+      "automation": {
+        "rules": [
+          {
+            "id": "auto_watering",
+            "description": "토양 건조시 자동 급수",
+            "condition": "soil_moisture > 3000",
+            "action": "activate_pump(3000ms)",
+            "enabled": true,
+            "last_triggered": "2024-01-15T09:45:00Z"
+          },
+          {
+            "id": "temperature_control",
+            "description": "고온시 환기팬 가동",
+            "condition": "temperature > 28.0",
+            "action": "activate_fan(true)",
+            "enabled": true,
+            "last_triggered": "2024-01-15T10:15:00Z"
+          },
+          {
+            "id": "led_lighting",
+            "description": "조도에 따른 LED 조명",
+            "condition": "light_level < 1000",
+            "action": "set_led_brightness(255)",
+            "enabled": true,
+            "last_triggered": "2024-01-15T08:30:00Z"
+          }
+        ]
+      },
+      "maintenance": {
+        "installation_date": "2024-01-01T00:00:00Z",
+        "last_maintenance": "2024-01-10T14:00:00Z",
+        "next_maintenance": "2024-02-10T14:00:00Z",
+        "maintenance_notes": [
+          "센서 캘리브레이션 완료",
+          "릴레이 접점 청소",
+          "WiFi 안테나 위치 조정"
+        ],
+        "warranty_expires": "2025-01-01T00:00:00Z"
+      },
+      "status": {
+        "overall": "healthy",
+        "network": "connected",
+        "sensors": "all_operational",
+        "actuators": "all_operational",
+        "last_error": null,
+        "alerts": []
+      }
+    },
+    
+    "greenhouse-002": {
+      "device_info": {
+        "name": "스마트 온실 보조 컨트롤러",
+        "model": "ESP32 DevKit V1",
+        "mac_address": "24:6F:28:AE:56:78",
+        "chip_id": "ESP32-D0WDQ6",
+        "flash_size": "4MB",
+        "cpu_frequency": "240MHz"
+      },
+      "network": {
+        "ip_address": "192.168.1.101",
+        "subnet_mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns_primary": "8.8.8.8",
+        "dns_secondary": "8.8.4.4",
+        "wifi_ssid": "SmartGreenhouse_5G",
+        "wifi_channel": 6,
+        "wifi_rssi": -52,
+        "static_ip": true
+      },
+      "firmware": {
+        "current_version": "1.2.3",
+        "build_date": "2024-01-15T08:30:00Z",
+        "build_hash": "a1b2c3d4e5f6",
+        "update_method": "OTA",
+        "auto_update": true,
+        "rollback_version": "1.2.2"
+      },
+      "hardware": {
+        "sensors": [
+          {
+            "type": "DHT22",
+            "pin": "GPIO2",
+            "description": "온습도 센서 (구역 2)",
+            "calibration": {
+              "temperature_offset": -0.5,
+              "humidity_offset": 2.0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "CO2_SENSOR",
+            "pin": "GPIO4",
+            "description": "CO2 농도 센서",
+            "calibration": {
+              "baseline": 400,
+              "scale_factor": 1.0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          }
+        ],
+        "actuators": [
+          {
+            "type": "SERVO",
+            "pin": "GPIO18",
+            "description": "자동 창문 개폐",
+            "range": "0-180도",
+            "status": "active",
+            "last_action": "2024-01-15T10:10:00Z"
+          },
+          {
+            "type": "BUZZER",
+            "pin": "GPIO19",
+            "description": "알람 부저",
+            "status": "active",
+            "last_action": "2024-01-14T16:20:00Z"
+          }
+        ]
+      },
+      "monitoring": {
+        "uptime": "68h 45m 12s",
+        "boot_time": "2024-01-13T01:40:00Z",
+        "restart_count": 1,
+        "free_heap": 195000,
+        "min_free_heap": 170000,
+        "max_alloc_heap": 120000,
+        "wifi_reconnects": 0,
+        "last_heartbeat": "2024-01-15T10:29:30Z"
+      },
+      "automation": {
+        "rules": [
+          {
+            "id": "ventilation_control",
+            "description": "CO2 농도 조절을 위한 환기",
+            "condition": "co2_level > 1000",
+            "action": "open_window(50%)",
+            "enabled": true,
+            "last_triggered": "2024-01-15T10:10:00Z"
+          },
+          {
+            "id": "emergency_alert",
+            "description": "비상상황 알림",
+            "condition": "temperature > 35.0 OR humidity > 95.0",
+            "action": "sound_alarm(3_beeps)",
+            "enabled": true,
+            "last_triggered": null
+          }
+        ]
+      },
+      "status": {
+        "overall": "healthy",
+        "network": "connected",
+        "sensors": "all_operational",
+        "actuators": "all_operational",
+        "last_error": null,
+        "alerts": []
+      }
+    },
+
+    "weather-001": {
+      "device_info": {
+        "name": "기상 관측소",
+        "model": "ESP32-S3 DevKit",
+        "mac_address": "24:6F:28:BC:90:12",
+        "chip_id": "ESP32-S3FH4R2",
+        "flash_size": "8MB",
+        "cpu_frequency": "240MHz"
+      },
+      "network": {
+        "ip_address": "192.168.1.102",
+        "subnet_mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns_primary": "8.8.8.8",
+        "dns_secondary": "8.8.4.4",
+        "wifi_ssid": "WeatherStation_2.4G",
+        "wifi_channel": 11,
+        "wifi_rssi": -38,
+        "static_ip": true
+      },
+      "firmware": {
+        "current_version": "2.1.0",
+        "build_date": "2024-01-12T15:20:00Z",
+        "build_hash": "x9y8z7w6v5u4",
+        "update_method": "OTA",
+        "auto_update": true,
+        "rollback_version": "2.0.8"
+      },
+      "hardware": {
+        "sensors": [
+          {
+            "type": "BME280",
+            "pin": "I2C_21_22",
+            "description": "온습도/기압 센서",
+            "calibration": {
+              "temperature_offset": 0.2,
+              "humidity_offset": -1.5,
+              "pressure_offset": 0.0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "WIND_SENSOR",
+            "pin": "GPIO4",
+            "description": "풍속/풍향 센서",
+            "calibration": {
+              "wind_speed_factor": 2.4,
+              "wind_direction_offset": 15
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "RAIN_GAUGE",
+            "pin": "GPIO5",
+            "description": "강우량 센서",
+            "calibration": {
+              "mm_per_tip": 0.2794
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "UV_SENSOR",
+            "pin": "GPIO6",
+            "description": "자외선 센서",
+            "calibration": {
+              "uv_factor": 1.0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          }
+        ],
+        "actuators": [
+          {
+            "type": "OLED_DISPLAY",
+            "pin": "I2C_21_22",
+            "description": "128x64 OLED 디스플레이",
+            "status": "active",
+            "last_action": "2024-01-15T10:25:00Z"
+          }
+        ]
+      },
+      "monitoring": {
+        "uptime": "168h 30m 45s",
+        "boot_time": "2024-01-08T17:55:00Z",
+        "restart_count": 0,
+        "free_heap": 220000,
+        "min_free_heap": 200000,
+        "max_alloc_heap": 150000,
+        "wifi_reconnects": 0,
+        "last_heartbeat": "2024-01-15T10:29:55Z"
+      },
+      "data_logging": {
+        "local_storage": {
+          "enabled": true,
+          "capacity": "16MB microSD",
+          "current_usage": "8.2MB",
+          "retention_days": 30
+        },
+        "cloud_backup": {
+          "enabled": true,
+          "provider": "AWS IoT Core",
+          "last_sync": "2024-01-15T10:20:00Z",
+          "sync_interval": "5_minutes"
+        }
+      },
+      "status": {
+        "overall": "excellent",
+        "network": "connected",
+        "sensors": "all_operational",
+        "actuators": "all_operational",
+        "last_error": null,
+        "alerts": []
+      }
+    },
+
+    "security-001": {
+      "device_info": {
+        "name": "보안 모니터링 시스템",
+        "model": "ESP32-CAM",
+        "mac_address": "24:6F:28:CD:EF:34",
+        "chip_id": "ESP32-CAM",
+        "flash_size": "4MB",
+        "cpu_frequency": "240MHz"
+      },
+      "network": {
+        "ip_address": "192.168.1.103",
+        "subnet_mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns_primary": "8.8.8.8",
+        "dns_secondary": "8.8.4.4",
+        "wifi_ssid": "Security_5G",
+        "wifi_channel": 1,
+        "wifi_rssi": -41,
+        "static_ip": true
+      },
+      "firmware": {
+        "current_version": "3.0.1",
+        "build_date": "2024-01-14T11:45:00Z",
+        "build_hash": "m9n8o7p6q5r4",
+        "update_method": "OTA",
+        "auto_update": false,
+        "rollback_version": "3.0.0"
+      },
+      "hardware": {
+        "sensors": [
+          {
+            "type": "CAMERA_OV2640",
+            "pin": "CAMERA_PINS",
+            "description": "2MP 카메라 모듈",
+            "settings": {
+              "resolution": "1600x1200",
+              "quality": 10,
+              "brightness": 0,
+              "contrast": 0
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "PIR_SENSOR",
+            "pin": "GPIO13",
+            "description": "적외선 동작 감지",
+            "calibration": {
+              "sensitivity": 80,
+              "delay_time": 5
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "SOUND_SENSOR",
+            "pin": "GPIO12",
+            "description": "소음 감지 센서",
+            "calibration": {
+              "threshold": 60
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          }
+        ],
+        "actuators": [
+          {
+            "type": "LED_FLASH",
+            "pin": "GPIO4",
+            "description": "카메라 플래시 LED",
+            "status": "active",
+            "last_action": "2024-01-15T07:32:00Z"
+          },
+          {
+            "type": "SIREN",
+            "pin": "GPIO14",
+            "description": "경보 사이렌",
+            "status": "active",
+            "last_action": "2024-01-14T23:15:00Z"
+          }
+        ]
+      },
+      "monitoring": {
+        "uptime": "24h 12m 18s",
+        "boot_time": "2024-01-14T22:13:00Z",
+        "restart_count": 3,
+        "free_heap": 120000,
+        "min_free_heap": 95000,
+        "max_alloc_heap": 80000,
+        "wifi_reconnects": 2,
+        "last_heartbeat": "2024-01-15T10:29:40Z"
+      },
+      "security_features": {
+        "motion_detection": {
+          "enabled": true,
+          "sensitivity": "medium",
+          "detection_zones": ["entrance", "parking"],
+          "notification_methods": ["email", "sms", "push"]
+        },
+        "video_recording": {
+          "enabled": true,
+          "trigger": "motion_detected",
+          "duration": "30_seconds",
+          "storage": "local_sd_card"
+        },
+        "live_streaming": {
+          "enabled": true,
+          "resolution": "800x600",
+          "frame_rate": 15,
+          "access_url": "http://192.168.1.103:8080/stream"
+        }
+      },
+      "status": {
+        "overall": "warning",
+        "network": "connected",
+        "sensors": "all_operational",
+        "actuators": "all_operational",
+        "last_error": "2024-01-15T03:45:00Z - WiFi reconnection",
+        "alerts": [
+          {
+            "type": "memory_warning",
+            "message": "자유 메모리 부족 (120KB < 150KB)",
+            "timestamp": "2024-01-15T10:15:00Z",
+            "severity": "medium"
+          }
+        ]
+      }
+    },
+
+    "lab-001": {
+      "device_info": {
+        "name": "실험실 환경 모니터",
+        "model": "ESP32-C3 DevKit",
+        "mac_address": "24:6F:28:DE:AB:56",
+        "chip_id": "ESP32-C3FH4",
+        "flash_size": "4MB",
+        "cpu_frequency": "160MHz"
+      },
+      "network": {
+        "ip_address": "192.168.1.104",
+        "subnet_mask": "255.255.255.0",
+        "gateway": "192.168.1.1",
+        "dns_primary": "8.8.8.8",
+        "dns_secondary": "8.8.4.4",
+        "wifi_ssid": "Laboratory_2.4G",
+        "wifi_channel": 6,
+        "wifi_rssi": -55,
+        "static_ip": true
+      },
+      "firmware": {
+        "current_version": "1.1.5",
+        "build_date": "2024-01-10T09:15:00Z",
+        "build_hash": "j8k7l6m5n4o3",
+        "update_method": "Serial",
+        "auto_update": false,
+        "rollback_version": "1.1.4"
+      },
+      "hardware": {
+        "sensors": [
+          {
+            "type": "SHT30",
+            "pin": "I2C_8_9",
+            "description": "고정밀 온습도 센서",
+            "calibration": {
+              "temperature_offset": 0.1,
+              "humidity_offset": 0.5
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "MQ135",
+            "pin": "GPIO3",
+            "description": "공기질 센서 (VOC, CO2)",
+            "calibration": {
+              "baseline": 450,
+              "sensitivity": 1.2
+            },
+            "status": "active",
+            "last_reading": "2024-01-15T10:25:00Z"
+          },
+          {
+            "type": "GEIGER_COUNTER",
+            "pin": "GPIO4",
+            "description": "방사선 측정기",
+            "calibration": {
+              "conversion_factor": 0.0057
+            },
+            "status": "maintenance",
+            "last_reading": "2024-01-14T18:30:00Z"
+          }
+        ],
+        "actuators": [
+          {
+            "type": "EMERGENCY_LIGHT",
+            "pin": "GPIO5",
+            "description": "비상 경고등",
+            "status": "active",
+            "last_action": "2024-01-12T14:20:00Z"
+          }
+        ]
+      },
+      "monitoring": {
+        "uptime": "120h 15m 05s",
+        "boot_time": "2024-01-10T14:10:00Z",
+        "restart_count": 1,
+        "free_heap": 280000,
+        "min_free_heap": 260000,
+        "max_alloc_heap": 200000,
+        "wifi_reconnects": 1,
+        "last_heartbeat": "2024-01-15T10:29:20Z"
+      },
+      "laboratory_features": {
+        "safety_monitoring": {
+          "radiation_threshold": 0.5,
+          "air_quality_threshold": 1000,
+          "temperature_limits": {"min": 18, "max": 25},
+          "humidity_limits": {"min": 40, "max": 60}
+        },
+        "data_precision": {
+          "temperature_accuracy": "±0.1°C",
+          "humidity_accuracy": "±1.5%RH",
+          "sampling_rate": "1Hz",
+          "calibration_interval": "monthly"
+        }
+      },
+      "status": {
+        "overall": "maintenance_required",
+        "network": "connected",
+        "sensors": "partial_operational",
+        "actuators": "all_operational",
+        "last_error": "2024-01-14T18:30:00Z - Geiger counter communication timeout",
+        "alerts": [
+          {
+            "type": "sensor_maintenance",
+            "message": "방사선 측정기 교정 필요",
+            "timestamp": "2024-01-14T18:30:00Z",
+            "severity": "high"
+          },
+          {
+            "type": "calibration_due",
+            "message": "월간 센서 교정 일정",
+            "timestamp": "2024-01-15T00:00:00Z",
+            "severity": "medium"
+          }
+        ]
+      }
+    }
+  },
+
+  "global_settings": {
+    "monitoring": {
+      "heartbeat_interval": 30,
+      "data_retention_days": 90,
+      "alert_escalation_minutes": 5,
+      "maintenance_check_hours": 24
+    },
+    "security": {
+      "encryption_enabled": true,
+      "certificate_expiry": "2024-12-31T23:59:59Z",
+      "access_control": "role_based",
+      "audit_logging": true
+    },
+    "backup": {
+      "enabled": true,
+      "interval": "daily",
+      "retention": "30_days",
+      "cloud_provider": "AWS_S3",
+      "encryption": "AES_256"
+    },
+    "notifications": {
+      "email": {
+        "enabled": true,
+        "smtp_server": "smtp.company.com",
+        "recipients": ["admin@company.com", "tech@company.com"]
+      },
+      "sms": {
+        "enabled": false,
+        "provider": "twilio",
+        "recipients": ["+82-10-1234-5678"]
+      },
+      "slack": {
+        "enabled": true,
+        "webhook_url": "https://hooks.slack.com/services/...",
+        "channel": "#iot-alerts"
+      }
+    }
+  },
+
+  "deployment_history": [
+    {
+      "timestamp": "2024-01-15T08:30:00Z",
+      "version": "1.2.3",
+      "devices": ["greenhouse-001", "greenhouse-002"],
+      "status": "success",
+      "deployment_time": "4m 32s",
+      "rollback_available": true
+    },
+    {
+      "timestamp": "2024-01-12T15:20:00Z", 
+      "version": "2.1.0",
+      "devices": ["weather-001"],
+      "status": "success",
+      "deployment_time": "2m 18s",
+      "rollback_available": true
+    },
+    {
+      "timestamp": "2024-01-14T11:45:00Z",
+      "version": "3.0.1",
+      "devices": ["security-001"],
+      "status": "success",
+      "deployment_time": "3m 45s",
+      "rollback_available": true
+    },
+    {
+      "timestamp": "2024-01-10T09:15:00Z",
+      "version": "1.1.5",
+      "devices": ["lab-001"],
+      "status": "partial_success",
+      "deployment_time": "8m 12s",
+      "rollback_available": true,
+      "notes": "센서 교정 후 배포 완료"
+    }
+  ],
+
+  "maintenance_schedule": [
+    {
+      "device": "greenhouse-001",
+      "type": "routine_maintenance",
+      "scheduled_date": "2024-02-10T14:00:00Z",
+      "description": "센서 캘리브레이션 및 청소",
+      "estimated_duration": "2h",
+      "assigned_technician": "김기술",
+      "status": "scheduled"
+    },
+    {
+      "device": "lab-001",
+      "type": "sensor_replacement",
+      "scheduled_date": "2024-01-20T10:00:00Z",
+      "description": "방사선 측정기 교체",
+      "estimated_duration": "4h",
+      "assigned_technician": "박전문",
+      "status": "pending_approval"
+    },
+    {
+      "device": "security-001",
+      "type": "memory_upgrade",
+      "scheduled_date": "2024-01-25T16:00:00Z",
+      "description": "메모리 부족 문제 해결",
+      "estimated_duration": "1h",
+      "assigned_technician": "이하드웨어",
+      "status": "scheduled"
+    }
+  ],
+
+  "statistics": {
+    "total_uptime_hours": 1248,
+    "average_uptime_percentage": 99.2,
+    "total_sensor_readings": 450000,
+    "successful_deployments": 47,
+    "failed_deployments": 3,
+    "maintenance_hours": 24,
+    "cost_savings": {
+      "energy": "15%",
+      "maintenance": "30%",
+      "operational": "25%"
+    }
+  }
+}
