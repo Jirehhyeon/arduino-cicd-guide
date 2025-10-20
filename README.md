@@ -1,4 +1,4 @@
-# 🚀 엔터프라이즈급 Arduino IoT DevOps 플랫폼
+# 🚀 Arduino IoT DevOps 플랫폼
 
 [![GitHub Stars](https://img.shields.io/github/stars/Jirehhyeon/arduino-cicd-guide?style=for-the-badge)](https://github.com/Jirehhyeon/arduino-cicd-guide/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/Jirehhyeon/arduino-cicd-guide?style=for-the-badge)](https://github.com/Jirehhyeon/arduino-cicd-guide/network)
